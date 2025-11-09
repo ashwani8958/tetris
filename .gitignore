@@ -1,5 +1,5 @@
 # SFML
-extern/SFML-*/
+extern
 
 # Prerequisites
 *.d
@@ -42,3 +42,6 @@ extern/SFML-*/
 
 # debug information files
 *.dwo
+
+# build directory
+build
