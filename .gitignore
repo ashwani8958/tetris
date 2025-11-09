@@ -1,3 +1,6 @@
+# SFML
+extern/SFML-*/
+
 # Prerequisites
 *.d
 
