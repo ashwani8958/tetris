@@ -135,3 +135,14 @@ std::vector<Vec2> Tetromino::getTransformedShape(int dx, int dy, int rotationDel
 
     return transformedShape;
 }
+
+void Tetromino::reset(TetrominoType type, int x, int y){
+	setType(type);
+	position = Vec2(x, y);
+}
+
+void Tetromino::setType(TetrominoType type){
+	this->type = type;
+	color = TetrominoColors[static_cast<int>(type)];
+	rotation = 0;
+}

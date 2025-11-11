@@ -39,6 +39,7 @@ class Tetromino {
     void rotateCounterClockwise();
 
     TetrominoType getType() const;
+    void setType(TetrominoType type);
 
     sf::Color getColor() const;
     void setColor(const sf::Color& color);
@@ -47,4 +48,6 @@ class Tetromino {
 
     std::vector<Vec2> getCurrentShape() const;
     std::vector<Vec2> getTransformedShape(int dx, int dy, int rotationDelta) const;
+
+    void reset(TetrominoType type, int x, int y);
 };
