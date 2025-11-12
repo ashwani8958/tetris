@@ -36,8 +36,8 @@ void GameBoard::placeTetromino(const Tetromino &tetromino)
 
     for(Vec2 &cell : currentTetromino){
         if(isInsideBoard(cell.x, cell.y)){
-            board[cell.x][cell.y].occupied = true;
-            board[cell.x][cell.y].color = tetromino.getColor();
+            board[cell.y][cell.x].occupied = true;
+            board[cell.y][cell.x].color = tetromino.getColor();
         }
     }
 }
@@ -50,7 +50,7 @@ std::vector<int> GameBoard::getFullLines() const{
         bool isFull = true;
 
         for(int x = 0; x < width; x++){
-            if(board[x][y].occupied == true){
+            if(board[y][x].occupied == false){
                 isFull = false;
                 break;
             }

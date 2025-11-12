@@ -1,6 +1,8 @@
 # SFML
 extern
 
+.vscode
+
 # Prerequisites
 *.d
 

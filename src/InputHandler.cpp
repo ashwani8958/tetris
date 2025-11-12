@@ -43,7 +43,7 @@ void InputHandler::processEvent(const sf::Event& event){
         case Action::SoftDrop:      softDropPressed = true;     break;
         case Action::HardDrop:      hardDropPressed = true;     break;
         case Action::Pause:         pausePressed = true;        break;
-        case Action::Exit:          moveLeftPressed = true;     break;
+        case Action::Exit:          exitPressed = true;         break;
         default:                                                break;
     }
 }
@@ -59,7 +59,7 @@ bool InputHandler::isExitPressed()          const { return exitPressed; }
 
 void InputHandler::reset(){
     moveLeftPressed     = false;
-    moveLeftPressed     = false;
+    moveRightPressed    = false;
     rotateLeftPressed   = false;
     rotateRightPressed  = false;
     softDropPressed     = false;

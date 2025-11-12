@@ -1,8 +1,8 @@
-#include "GameEngine.hpp"
 #include <iostream>
+#include "GameEngine.hpp"
 
 GameEngine::GameEngine(int boardWidth, int boardHeight)
-    : gameState(GameState::Menu), board(boardWidth, boardHeight), fallDelay(0.8f) // default fall speed
+    : gameState(GameState::Menu), board(boardWidth, boardHeight), fallDelay(1.0f) // default fall speed
 {
     // Initialize or load resources if needed
 }

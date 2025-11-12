@@ -64,38 +64,45 @@ const std::vector<sf::Color> Tetromino::TetrominoColors = {
 };
 
 Tetromino::Tetromino()
-:type(TetrominoType::None), position(0, 0), rotation(0), color(sf::Color::Cyan) {}
+:type(TetrominoType::None), position(0, 0), rotation(0), color(sf::Color::Black) {}
 
 Tetromino::Tetromino(TetrominoType type)
-:type(type), position(0, 0), rotation(0), color(TetrominoColors[static_cast<int>(type)]) {}
+:type(type), position(3, 0), rotation(0){
+	color = TetrominoColors[static_cast<int>(type)];
+}
 
 Vec2 Tetromino::getPosition() const{
-    return position;
+	return position;
 }
 
 void Tetromino::setPosition(int x, int y){
-    position.x = x;
-    position.y = y;
+	position = Vec2(x,y);
 }
 
 int Tetromino::getRotation() const{
-    return rotation;
+	return rotation;
 }
 
 void Tetromino::setRotation(int rotation){
-    this->rotation = rotation % 4;
+	this->rotation = rotation % 4;
 }
 
 void Tetromino::rotateClockwise(){
-    rotation = (rotation + 1) % 4;
+	rotation = (rotation + 1) % 4;
 }
 
 void Tetromino::rotateCounterClockwise(){
-    rotation = (rotation + 3) % 4;
+	rotation = (rotation + 3) % 4;
 }
 
 TetrominoType Tetromino::getType() const{
-    return type;
+	return type;
+}
+
+void Tetromino::setType(TetrominoType type){
+	this->type = type;
+	color = TetrominoColors[static_cast<int>(type)];
+	rotation = 0;
 }
 
 void Tetromino::setColor(const sf::Color& color){
@@ -117,7 +124,13 @@ std::vector<Vec2> Tetromino::getCurrentShape() const{
         return {};
     }
 
-    return TetrominoShapes[static_cast<int>(type)][rotation];
+	int typeIndex = static_cast<int>(type);
+	std::vector<Vec2> transformedShape;
+    for(const Vec2& block : TetrominoShapes[typeIndex][rotation]){
+        transformedShape.push_back(Vec2(block.x + position.x, block.y + position.y));
+    }
+
+    return transformedShape;
 }
 
 std::vector<Vec2> Tetromino::getTransformedShape(int dx, int dy, int rotationDelta) const{
@@ -125,12 +138,12 @@ std::vector<Vec2> Tetromino::getTransformedShape(int dx, int dy, int rotationDel
         return {};
     }
 
-    int newRotation = (rotation + rotationDelta) % 4;
+    int newRotation = (rotation + rotationDelta + 4) % 4;
     int typeIndex = static_cast<int>(type);
 
     std::vector<Vec2> transformedShape;
     for(const Vec2& block : TetrominoShapes[typeIndex][newRotation]){
-        transformedShape.push_back(Vec2(block.x + dx, block.y + dy));
+        transformedShape.push_back(Vec2(block.x + position.x + dx,  block.y + position.y + dy));
     }
 
     return transformedShape;
@@ -139,10 +152,4 @@ std::vector<Vec2> Tetromino::getTransformedShape(int dx, int dy, int rotationDel
 void Tetromino::reset(TetrominoType type, int x, int y){
 	setType(type);
 	position = Vec2(x, y);
-}
-
-void Tetromino::setType(TetrominoType type){
-	this->type = type;
-	color = TetrominoColors[static_cast<int>(type)];
-	rotation = 0;
 }

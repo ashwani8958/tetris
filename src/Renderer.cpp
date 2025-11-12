@@ -18,8 +18,11 @@ bool Renderer::isWindowOpen() const{
 
 void Renderer::drawCell(int x, int y, sf::Color color){
     sf::RectangleShape cellShape(sf::Vector2f(cellSize - 2, cellSize - 2));
+    
     cellShape.setPosition({static_cast<float>(x * cellSize + 1), static_cast<float>(y * cellSize + 1)});
     cellShape.setFillColor(color);
+
+    window.draw(cellShape);
 }
 
 void Renderer::drawBoard(const GameBoard& board){
@@ -54,7 +57,7 @@ void Renderer::drawTetromino(const Tetromino& tetromino){
 }
 
 void Renderer::drawNextTetromino(const Tetromino& tetromino){
-    sf::Vector2i offset(12, 2);
+    sf::Vector2i offset(16, 2);
     sf::Color color = tetromino.getColor();
 
     for(const auto& block : tetromino.getCurrentShape()){
